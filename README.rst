@@ -6,8 +6,8 @@ A Flask-restful template for cookiecutter_, based on Steven Loria's cookiecutter
 .. _cookiecutter-flask: https://github.com/sloria/cookiecutter-flask
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
 
-.. image:: https://travis-ci.org/camphor/cookiecutter-fleskful.svg
-    :target: https://travis-ci.org/camphor/cookiecutter-fleskful
+.. image:: https://travis-ci.org/Kamforka/cookiecutter-fleskful.svg
+    :target: https://travis-ci.org/Kamforka/cookiecutter-fleskful
     :alt: Build Status
 
 Installation
