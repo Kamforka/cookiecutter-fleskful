@@ -15,7 +15,7 @@ Installation
 ::
 
     $ pip install cookiecutter
-    $ cookiecutter https://github.com/camphor/cookiecutter-fleskful.git
+    $ cookiecutter https://github.com/kamforka/cookiecutter-fleskful.git
 
 You will be asked about your basic info (name, project name, app name, etc.). This info will be used in your new project.
 
