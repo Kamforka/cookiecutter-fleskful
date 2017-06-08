@@ -9,9 +9,9 @@ from webargs.flaskparser import use_args
 from {{cookiecutter.app_name}}.models.users import User
 
 user_args = {
-        'username': argfields.Str(),
-        'password': argfields.Str(),
-        'email': argfields.Str(),
+    'username': argfields.Str(),
+    'password': argfields.Str(),
+    'email': argfields.Str(),
 }
 
 

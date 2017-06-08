@@ -50,9 +50,9 @@ class TestUserView:
     def test_update_user(self, testapp_with_auth, user):
         """Test user update with api."""
         testapp_with_auth.put('/api/users/{user_id}'.format(user_id=user.id),
-                {'username': 'updated_user',
-                 'email': 'email@updated.com',
-                }, status=201)
+                              {'username': 'updated_user',
+                               'email': 'email@updated.com',
+                               }, status=201)
 
         assert user.username == 'updated_user'
         assert user.email == 'email@updated.com'
