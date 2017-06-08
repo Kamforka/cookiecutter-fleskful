@@ -2,14 +2,17 @@
 """User resources."""
 
 from flask_jwt import jwt_required
-from flask_restful import Resource, fields, marshal, marshal_with, reqparse
+from flask_restful import Resource, fields, marshal, marshal_with
+from webargs import fields as argfields
+from webargs.flaskparser import use_args
 
 from {{cookiecutter.app_name}}.models.users import User
 
-parser = reqparse.RequestParser()
-parser.add_argument('username')
-parser.add_argument('password')
-parser.add_argument('email')
+user_args = {
+        'username': argfields.Str(),
+        'password': argfields.Str(),
+        'email': argfields.Str(),
+}
 
 
 resource_fields = {
@@ -31,17 +34,12 @@ class UserView(Resource):
         return 'User not found', 404
 
     @jwt_required()
-    def put(self, user_id, **kwargs):
+    @use_args(user_args)
+    def put(self, args, user_id):
         """Update a user."""
         user = User.get_by_id(user_id)
         if user:
-            args = parser.parse_args()
-            for arg, val in args.items():
-                if val:
-                    # if a value is provided for an attr, then update its value
-                    setattr(user, arg, val.encode())
-
-            user.save()
+            user = user.update(**args)
             return marshal(user, resource_fields), 201
 
         return 'User not found', 404
@@ -56,11 +54,11 @@ class UserViewList(Resource):
         """List users."""
         return User.query.all(), 200
 
-    def post(self):
+    @use_args(user_args)
+    def post(self, args):
         """Register user."""
-        args = parser.parse_args()
-
         user = User.query.filter_by(username=args['username']).first()
+
         if user:
             return 'User already exists', 409
 
