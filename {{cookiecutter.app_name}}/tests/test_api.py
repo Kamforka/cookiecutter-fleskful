@@ -49,12 +49,13 @@ class TestUserView:
 
     def test_update_user(self, testapp_with_auth, user):
         """Test user update with api."""
-        testapp_with_auth.put_json('/api/users/{user_id}'.format(user_id=user.id),
-                                   dict(username='new_name', email='fresh@new.com', ),
-                                   status=201)
+        testapp_with_auth.put('/api/users/{user_id}'.format(user_id=user.id),
+                {'username': 'updated_user',
+                 'email': 'email@updated.com',
+                }, status=201)
 
-        assert user.username.decode() == 'new_name'
-        assert user.email.decode() == 'fresh@new.com'
+        assert user.username == 'updated_user'
+        assert user.email == 'email@updated.com'
         assert user.check_password('myprecious')  # password remain unchanged
 
 
